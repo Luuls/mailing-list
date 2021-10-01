@@ -83,16 +83,20 @@ bool list_sort_name(MAIL_LIST *head) {
         return false;
     }
 
-    MailNode *list_end = NULL;
-    MailNode *curr_node = *head;
-    MailNode *next_node = curr_node->next->next;
-
-    while (list_end != *head) {
-        if (curr_node == *head) {
-            //ORDENA ESSA MERDA vambora vamo
+    MailNode *i;
+    MailNode *j;
+    for (i = *head; i != NULL; i = i->next) {
+        for (j = i->next; j != NULL; j = j->next) {
+            if (strcmp(i->name, j->name) > 0) {
+                MAIL_CONTACT tmp_contact;
+                set_new_contact(&tmp_contact, *i);
+                set_new_contact(i, *j);
+                set_new_contact(j, tmp_contact);
+            }
         }
-        while (strcmp(next_node->name, curr_node->name) > 0)
     }
+
+    return true;
 }
 
 void list_print(MAIL_LIST head) {

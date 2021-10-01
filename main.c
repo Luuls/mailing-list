@@ -7,6 +7,7 @@ int main() {
     MAIL_LIST list = NULL;
     MAIL_CONTACT contact;
 
+    
     for (int i = 0; i < 3; i++) {
         printf("\nInsira os dados da pessoa %d: \n", i + 1);
         printf("Nome: ");
@@ -29,12 +30,13 @@ int main() {
         contact.zip[strlen(contact.zip) - 1] = '\0';
         fflush(stdin);
 
-        if (!list_add_ordened_name(&list, contact)) {
+        if (!list_add_end(&list, contact)) {
             fprintf(stderr, "Erro ao inserir pessoa. Saindo.");
             return 1;
         }
     }
 
+    list_sort_name(&list);
     system("cls");
     list_print(list);
 
