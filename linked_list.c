@@ -100,6 +100,11 @@ bool list_sort_name(MAIL_LIST *head) {
 }
 
 void list_print(MAIL_LIST head) {
+    if (head == NULL) {
+        puts("--- LISTA VAZIA ---\n");
+        return;
+    }
+    
     int i = 1;
     for (MailNode *curr_node = head;
         curr_node != NULL;
@@ -110,4 +115,5 @@ void list_print(MAIL_LIST head) {
         printf("Cidade: %s\n", curr_node->city);
         printf("CEP: %s\n", curr_node->zip);
     }
+    return;
 }
