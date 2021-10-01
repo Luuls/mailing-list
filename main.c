@@ -11,75 +11,86 @@ int main() {
     MAIL_LIST list = NULL;
     MAIL_CONTACT contact;
 
-    while (option != QUIT) {
-        puts("[1] Inserir item no começo da lista\n");
-        puts("[2] Inserir item no fim da lista\n");
-        puts("[3] Inserir item ordenadamente na lista\n");
-        puts("[4] Ordenar lista\n");
-        puts("[5] Ver a lista\n");
+    while (1) {
+        puts("[1] Inserir item no comeco da lista");
+        puts("[2] Inserir item no fim da lista");
+        puts("[3] Inserir item ordenadamente na lista");
+        puts("[4] Ordenar lista");
+        puts("[5] Ver a lista6");
         puts("[6] Sair");
         scanf("%d", &option);
+        fflush(stdin);
+        if (option == QUIT) {
+            return 0;
+        }
 
         if (option == LIST_PRINT) {
             list_print(list);
         }
+        else if (option == LIST_SORT_NAME) {
+            if (list_sort_name(&list)) {
+                puts("Lista organizada com sucesso.\n");
+            }
+            else {
+                puts("Lista possui apenas uma pessoa ou esta vazia");
+            }
+        }
         else {
             puts("\nInsira os dados da pessoa: ");
-            puts("Nome: ");
+            printf("Nome: ");
             fgets(contact.name, MAX_NAME, stdin);
             contact.name[strlen(contact.name) - 1] = '\0';
+            fflush(stdin);
 
-            puts("Endereco: ");
+            printf("Endereco: ");
             fgets(contact.address, MAX_ADDRESS, stdin);
             contact.address[strlen(contact.address) - 1] = '\0';
+            fflush(stdin);
 
-            puts("Cidade: ");
+            printf("Cidade: ");
             fgets(contact.city, MAX_CITY, stdin);
             contact.city[strlen(contact.city) - 1] = '\0';
+            fflush(stdin);
 
-            puts("CEP: ");
+            printf("CEP: ");
             fgets(contact.zip, MAX_ZIP, stdin);
             contact.zip[strlen(contact.zip) - 1] = '\0';
+            fflush(stdin);
         }
 
         switch (option) {
         case LIST_ADD_START:
             if (list_add_start(&list, contact)) {
+                printf("%s adicionado(a) com sucesso!\n", contact.name);
+                break;
+            }
+            else {
                 system("cls");
                 fprintf(stderr, "Problema ao inserir pessoa na lista. Saindo.");
                 return 1;
             }
-
-            printf("%s adicionado(a) com sucesso!\n", contact.name);
-            break;
 
         case LIST_ADD_END:
             if (list_add_end(&list, contact)) {
+                printf("%s adicionado(a) com sucesso!\n", contact.name);
+                break;
+            }
+            else {
                 system("cls");
                 fprintf(stderr, "Problema ao inserir pessoa na lista. Saindo.");
                 return 1;
             }
-
-            printf("%s adicionado(a) com sucesso!\n", contact.name);
-            break;
 
         case LIST_ADD_ORDENED_NAME:
             if (list_add_ordened_name(&list, contact)) {
+                printf("%s adicionado(a) com sucesso!\n", contact.name);
+                break;
+            }
+            else {
                 system("cls");
                 fprintf(stderr, "Problema ao inserir pessoa na lista. Saindo.");
                 return 1;
             }
-
-            printf("%s adicionado(a) com sucesso!\n", contact.name);
-            break;
-        case LIST_SORT_NAME:
-            if (list_sort_name(&list)) {
-                puts("Lista organizada com sucesso.\n");
-            }
-            else {
-                puts("Lista possui apenas uma pessoa ou está vazia");
-            }
-            break;
             
         default:
             break;

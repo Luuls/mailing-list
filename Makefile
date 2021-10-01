@@ -7,7 +7,7 @@ all: mail_list
 mail_list: $(OBJ)
 	$(CC) $(CFLAGS) -o mail_list $(OBJ)
 
-main.o: main.c linked_list.h
+main.o: main.c linked_list.h options.h
 
 linked_list.o: linked_list.c linked_list.h
 
